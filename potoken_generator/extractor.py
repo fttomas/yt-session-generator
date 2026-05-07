@@ -102,8 +102,10 @@ class PotokenExtractor:
             self._extraction_done.clear()
             try:
                 browser = await nodriver.start(headless=False,
+                                               sandbox=False,
                                                browser_executable_path=self.browser_path,
-                                               user_data_dir=self.profile_path)
+                                               user_data_dir=self.profile_path,
+                                               browser_args=['--disable-gpu'])
             except FileNotFoundError as e:
                 msg = "could not find Chromium. Make sure it's installed or provide direct path to the executable"
                 raise FileNotFoundError(msg) from e
